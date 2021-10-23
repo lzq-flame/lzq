@@ -5,6 +5,17 @@
 
 package utils
 
-func Intercept(path string) {
+import "os/exec"
+
+const AFTER_PATH = "D:\\video\\test\\after\\first.mp4"
+
+func Intercept(path string, starTime, endTime string) error {
+	cmdLine := "ffmpeg -i " + path + " -ss " + starTime + " -to " + endTime + " -acodec copy " + AFTER_PATH
+	cmd := exec.Command("cmd", "/c", cmdLine)
+	err := cmd.Run()
+	if err != nil {
+		return err
+	}
+	return nil
 
 }
